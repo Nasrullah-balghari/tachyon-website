@@ -78,8 +78,13 @@
 }
 
 @media (max-width: 1024px) {
-  .navDesktop,
-  .headerCta {
+  .navDesktop {
+    display: none;
+  }
+  /* Compound selector so this beats the global `.btn { display:inline-block }`
+     that the button also carries (equal specificity would lose on source order,
+     leaving the CTA visible and squeezing the hamburger off-screen). */
+  .header .headerCta {
     display: none;
   }
   .toggle {
