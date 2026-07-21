@@ -1,0 +1,167 @@
+/* ============================ Hire Talent ============================ */
+
+/* --- Two offer cards ---------------------------------------------------- */
+.offersSection {
+  background: #fff;
+  padding: 80px 0 40px;
+}
+
+.offers {
+  max-width: var(--maxw-content);
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 22px;
+}
+
+.offerCard {
+  padding: 40px;
+  background: var(--light);
+  border-radius: 18px;
+}
+
+.offerTitle {
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 22px 0 12px;
+}
+
+.offerDesc {
+  color: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- Engagement models -------------------------------------------------- */
+.modelsSection {
+  background: #fff;
+  padding: 40px 0;
+}
+
+.modelsInner {
+  max-width: var(--maxw-content);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.modelsHeading {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  margin: 0 0 24px;
+}
+
+.models {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+  gap: 18px;
+}
+
+.modelCard {
+  padding: 26px;
+  background: var(--light);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.modelLabel {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+/* --- Dark CTA ----------------------------------------------------------- */
+.ctaSection {
+  background: #fff;
+  padding: 40px 0 96px;
+}
+
+.ctaInner {
+  max-width: var(--maxw-content);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.ctaCard {
+  padding: 56px 48px;
+  background: var(--dark-surface);
+  border-radius: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.ctaCopy {
+  max-width: 600px;
+}
+
+.ctaHeading {
+  font-size: clamp(26px, 3.4vw, 32px);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 10px;
+  letter-spacing: -0.5px;
+}
+
+.ctaDot {
+  color: var(--accent);
+}
+
+.ctaSub {
+  color: #b4b8bf;
+  font-size: 18px;
+  margin: 0;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.ctaBtn:hover {
+  background: var(--accent-hover);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .offersSection {
+    padding: 48px 0 24px;
+  }
+  .offers,
+  .modelsInner,
+  .ctaInner {
+    padding: 0 24px;
+  }
+  .offerCard {
+    padding: 30px 24px;
+  }
+  .ctaSection {
+    padding: 24px 0 56px;
+  }
+  .ctaCard {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 36px 26px;
+  }
+  .ctaBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

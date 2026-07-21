@@ -1,0 +1,85 @@
+/* ============================ Contact ============================ */
+
+.section {
+  background: #fff;
+  padding: 76px 0 96px;
+}
+
+.grid {
+  max-width: var(--maxw-content);
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.company {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  margin: 0 0 26px;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.infoRow {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+/* Gray tile with an accent icon (not the palette IconTile). */
+.infoTile {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--light);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.infoLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 2px 0 4px;
+}
+
+.infoValue {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  word-break: break-word;
+}
+
+.infoValue:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 48px 0 56px;
+  }
+  .grid {
+    padding: 0 24px;
+  }
+}

@@ -1,0 +1,94 @@
+/* Keyframes live here, not in globals.css: CSS Modules scopes the animation
+   name in the `animation:` shorthand below, so the @keyframes must be scoped
+   in the same file for the names to match. */
+@keyframes marqL {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marqR {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.band {
+  background: var(--light);
+  padding: 80px 0 90px;
+  overflow: hidden;
+}
+
+.head {
+  max-width: 1000px;
+  margin: 0 auto 50px;
+  text-align: center;
+  padding: 0 40px;
+}
+
+.heading {
+  font-size: clamp(30px, 4.4vw, 46px);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin: 0 0 20px;
+}
+
+.desc {
+  font-size: clamp(16px, 1.9vw, 20px);
+  color: var(--body);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.marquee {
+  overflow: hidden;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 70px;
+  width: max-content;
+  padding-left: 70px;
+}
+
+/* Row 1 scrolls right → left, row 2 left → right. */
+.rowL {
+  animation: marqL 34s linear infinite;
+}
+
+.rowR {
+  animation: marqR 34s linear infinite;
+}
+
+.word {
+  font-size: clamp(30px, 4vw, 56px);
+  font-weight: 700;
+  color: #cdd1d6;
+  letter-spacing: -1px;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .band {
+    padding: 52px 0 56px;
+  }
+  .head {
+    margin-bottom: 36px;
+  }
+  .row {
+    gap: 40px;
+    padding-left: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rowL,
+  .rowR {
+    animation: none;
+  }
+}

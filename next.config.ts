@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Hide the dev-tools overlay indicator (the floating "N" badge in dev).
+  devIndicators: false,
 };
 
 export default nextConfig;

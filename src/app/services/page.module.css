@@ -1,0 +1,167 @@
+/* ============================ Services ============================ */
+
+.cardsSection {
+  background: #fff;
+  padding: 80px 0 40px;
+}
+
+.cards {
+  max-width: var(--maxw-content);
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+/* Tinted card, no border, no hover — full-width, content stacked. */
+.card {
+  background: var(--light);
+  border-radius: 18px;
+  padding: 44px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.num {
+  font-weight: 700;
+  font-size: 30px;
+  color: #cbd0d6;
+}
+
+.title {
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  margin: 0 0 12px;
+}
+
+.desc {
+  color: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 22px;
+  max-width: 640px;
+}
+
+.points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.point {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--accent-tint);
+  border-radius: 100px;
+  color: var(--accent-deep);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* --- Closing CTA card --------------------------------------------------- */
+.ctaSection {
+  background: #fff;
+  padding: 60px 0 96px;
+}
+
+/* Same width + side padding as .cards so the card edges line up with the
+   three cards above. */
+.ctaInner {
+  max-width: var(--maxw-content);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.ctaCard {
+  border-radius: 20px;
+  background: var(--dark-surface);
+  padding: 60px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.ctaHeading {
+  font-size: clamp(26px, 3.4vw, 32px);
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  max-width: 560px;
+  line-height: 1.2;
+}
+
+.ctaDot {
+  color: var(--accent);
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.ctaBtn:hover {
+  background: var(--accent-hover);
+}
+
+@media (max-width: 900px) {
+  .cardsSection {
+    padding: 56px 0 24px;
+  }
+  .card {
+    padding: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .cardsSection {
+    padding: 48px 0 24px;
+  }
+  .cards {
+    padding: 0 24px;
+  }
+  .card {
+    padding: 30px 24px;
+  }
+  .ctaSection {
+    padding: 40px 0 56px;
+  }
+  .ctaInner {
+    padding: 0 24px;
+  }
+  /* Stack heading above a full-width button on phones. */
+  .ctaCard {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 36px 26px;
+  }
+  .ctaHeading {
+    max-width: none;
+  }
+  .ctaBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,17 +1,42 @@
+/* ==========================================================================
+   Tachyon Consultants — global styles
+   Base reset + keyframes transcribed from the prototype's <style> block.
+   Everything under "Responsive layer" is new: the prototype was desktop-only.
+   ========================================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Palette — Developer Handoff §4 */
+  --accent: #ea5b2c;
+  --accent-hover: #d24e22;
+  --accent-deep: #c24e22;
+  --accent-tint: #fce9e1;
+  --ink: #17150f;
+  --dark-surface: #12100d;
+  --slate: #1e2530;
+  --body: #5c636e;
+  --muted: #a2a7ad;
+  --light: #f4f5f6;
+  --border: #e3e5e8;
+  --border-light: #eee;
+
+  /* Icon-tile cycle */
+  --tile-1: #ea5b2c;
+  --tile-2: #17150f;
+  --tile-3: #2563eb;
+  --tile-4: #158b84;
+  --tile-5: #1f9d57;
+
+  /* Layout.
+     --maxw-content is the design's 1180px widened to 1280px — change it here
+     and every section using .container--content follows. */
+  --maxw: 1360px;
+  --maxw-content: 1280px;
+  --maxw-narrow: 1080px;
+  --radius-card: 18px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
+* {
+  box-sizing: border-box;
 }
 
 html,
@@ -21,19 +46,20 @@ body {
 }
 
 body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  color: #17150f;
+  background: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
+h1,
+h2,
+h3,
+h4,
+p,
+figure {
   margin: 0;
 }
 
@@ -42,8 +68,114 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+img {
+  max-width: 100%;
+}
+
+/* Keyframes are defined inside the CSS Modules that use them (TechMarquee,
+   page): CSS Modules scopes the animation name, so the @keyframes must be
+   scoped in the same file to match. */
+
+/* ==========================================================================
+   Responsive layer
+   ========================================================================== */
+
+/* --- Container ---------------------------------------------------------- */
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.container--content { max-width: var(--maxw-content); }
+.container--narrow { max-width: var(--maxw-narrow); }
+
+@media (max-width: 900px) {
+  .container { padding-left: 24px; padding-right: 24px; }
+}
+@media (max-width: 560px) {
+  .container { padding-left: 18px; padding-right: 18px; }
+}
+
+/* --- Section rhythm ----------------------------------------------------- */
+.section { padding-top: 96px; padding-bottom: 96px; }
+
+@media (max-width: 900px) {
+  .section { padding-top: 64px; padding-bottom: 64px; }
+}
+@media (max-width: 560px) {
+  .section { padding-top: 48px; padding-bottom: 48px; }
+}
+
+/* --- Fluid type --------------------------------------------------------- */
+/* The design's fixed desktop sizes are the upper bound of each clamp. */
+.h1 {
+  font-size: clamp(34px, 6vw, 62px);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+.h1--sm { font-size: clamp(32px, 5.2vw, 54px); letter-spacing: -1.5px; line-height: 1.06; }
+.h2 {
+  font-size: clamp(28px, 4.2vw, 44px);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+.h3 {
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.25;
+  font-weight: 600;
+}
+.lead {
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.7;
+  color: #5c636e;
+}
+.body {
+  font-size: clamp(14px, 1.4vw, 16px);
+  line-height: 1.7;
+  color: #5c636e;
+}
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ea5b2c;
+}
+
+/* --- Buttons ------------------------------------------------------------ */
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+.btn--accent {
+  background: #ea5b2c;
+  color: #fff;
+  font-size: clamp(15px, 1.7vw, 18px);
+  padding: 16px 30px;
+}
+.btn--accent:hover { background: #d24e22; color: #fff; }
+.btn--dark {
+  background: #17150f;
+  color: #fff;
+  font-size: 15px;
+  padding: 13px 20px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.btn--dark:hover { background: #ea5b2c; color: #fff; }
+
+/* --- Accessibility ------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -1,0 +1,24 @@
+.heading {
+  margin: 0;
+}
+
+/* The design ends every section heading with an accent-colored period. */
+.dot {
+  color: var(--accent);
+}
+
+.muted {
+  color: var(--body);
+}
+
+/* Sits on a muted heading, so it reads as the emphasized phrase.
+   Ink text over an accent underline — per the design. When the phrase wraps,
+   the border draws under each line fragment, which is the intended look. */
+.highlight {
+  color: var(--ink);
+  border-bottom: 3px solid var(--accent);
+}
+
+.onDark {
+  color: #fff;
+}

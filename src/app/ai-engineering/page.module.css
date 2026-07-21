@@ -1,0 +1,437 @@
+/* ============================ AI Engineering ============================ */
+
+/* --- Stats strip -------------------------------------------------------- */
+.statsStrip {
+  background: #fff;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* No gap — vertical dividers between columns come from each cell's
+   border-right, matching the design. */
+.stats {
+  max-width: var(--maxw-content);
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* Icon on top, then title, then description (vertical). */
+.stat {
+  padding: 46px 28px;
+  border-right: 1px solid var(--border-light);
+}
+
+.statNum {
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  margin-top: 16px;
+}
+
+.statDesc {
+  color: var(--body);
+  font-size: 15px;
+  margin-top: 6px;
+}
+
+@media (max-width: 640px) {
+  .stats {
+    padding: 0 24px;
+    grid-template-columns: 1fr 1fr;
+  }
+  /* Remove the divider from the right-hand column of each pair. */
+  .stat:nth-child(2n) {
+    border-right: none;
+  }
+  .stat {
+    padding: 32px 20px;
+  }
+}
+@media (max-width: 420px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+  .stat {
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+  }
+}
+
+/* --- Section scaffold + gray cards (shared by AI card sections) --------- */
+.aiSection {
+  padding: 88px 0;
+}
+
+.aiSection--white {
+  background: #fff;
+}
+
+.aiInner {
+  max-width: var(--maxw-content);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.aiEyebrow {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.aiH2 {
+  font-size: clamp(30px, 4.4vw, 42px);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -1px;
+  /* top: gap from the eyebrow label · bottom: gap down to the cards */
+  margin: 18px 0 60px;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 22px;
+}
+
+.grayCard {
+  background: var(--light);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.grayCardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grayNum {
+  font-weight: 700;
+  font-size: 15px;
+  color: #c0c5cb;
+}
+
+.grayTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 20px 0 8px;
+}
+
+.grayDesc {
+  color: var(--body);
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .aiSection {
+    padding: 56px 0;
+  }
+  .aiInner {
+    padding: 0 24px;
+  }
+  .aiH2 {
+    margin-bottom: 44px;
+  }
+  .grayCard {
+    padding: 26px;
+  }
+}
+
+/* Section background modifiers. */
+.aiSectionTint {
+  background: var(--light);
+}
+.aiSectionDark {
+  background: var(--dark-surface);
+}
+
+/* --- Legacy modernization (white cards on tint) ------------------------- */
+.legacyCard {
+  padding: 32px;
+  background: #fff;
+  border-radius: 16px;
+}
+
+.legacyNum {
+  font-weight: 700;
+  font-size: 34px;
+  color: var(--accent);
+  width: fit-content;
+}
+
+.legacyTitle {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 16px 0 6px;
+}
+
+.legacyDesc {
+  color: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --- AI agents (gray cards, 8-up) --------------------------------------- */
+.agentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: 20px;
+}
+
+.agentCard {
+  padding: 26px;
+  background: var(--light);
+  border-radius: 14px;
+}
+
+.agentTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 18px 0 7px;
+}
+
+.agentDesc {
+  color: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --- Selected work (bordered case cards) -------------------------------- */
+.workGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr));
+  gap: 22px;
+}
+
+.workCard {
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+}
+
+.workCard:hover {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.workHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.workLogo {
+  height: 30px;
+  max-width: 150px;
+  width: auto;
+  object-fit: contain;
+  object-position: left;
+}
+
+.workSector {
+  padding: 5px 11px;
+  background: var(--accent-tint);
+  border-radius: 100px;
+  color: var(--accent-deep);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.workName {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+
+.workProblem {
+  font-style: italic;
+  color: var(--body);
+  font-size: 15px;
+  margin: 0 0 16px;
+}
+
+.workLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+
+.workBuilt {
+  color: #3a414b;
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0 0 18px;
+}
+
+.workTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.workTag {
+  padding: 5px 12px;
+  background: var(--light);
+  border-radius: 7px;
+  color: var(--body);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* --- Our stack (gray cards, chip lists) --------------------------------- */
+/* Design shows 3 across with the 4th wrapping below (its 1180px container
+   fits exactly 3 of these); pin to 3 so our wider container matches. */
+.stackGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+@media (max-width: 900px) {
+  .stackGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .stackGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stackCard {
+  padding: 30px;
+  background: var(--light);
+  border-radius: 16px;
+}
+
+.stackHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.stackTitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.stackItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stackChip {
+  padding: 6px 13px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: #3a414b;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* --- Why us (dark) ------------------------------------------------------ */
+.whyEyebrow {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 0 0 56px;
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+  gap: 22px;
+}
+
+.whyCard {
+  padding: 30px;
+  background: #1b1915;
+  border-radius: 16px;
+}
+
+.whyKey {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--accent);
+  letter-spacing: 2px;
+  margin-top: 20px;
+}
+
+.whyDesc {
+  color: #d8dade;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px 0 0;
+}
+
+.whyFoot {
+  margin-top: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.whyFootHeading {
+  font-weight: 700;
+  font-size: clamp(24px, 3.2vw, 30px);
+  color: #fff;
+  margin: 0;
+  max-width: 640px;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+}
+
+/* Orange pill button with arrow, reused across AI CTAs. */
+.arrowBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.arrowBtn:hover {
+  background: var(--accent-hover);
+  color: #fff;
+}

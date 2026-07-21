@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tachyon Consultants — Website
 
-## Getting Started
-
-First, run the development server:
+Next.js 16 (App Router) rebuild of the approved Tachyon Consultants design.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # http://localhost:3000
+npm run build
+npm run start
+npm run lint
+npm run sync:assets   # re-import images from the design project
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Link to the design project
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`design-source/` is a **Windows junction** pointing at the original design
+project (in `Downloads/`). It is the reference for all copy, layout, and
+assets — it is *not* part of the build (excluded in `tsconfig.json` and
+`.gitignore`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| File in `design-source/` | What it is |
+|---|---|
+| `Tachyon BairesDev.dc.html` | Source of truth — all six pages, verified to match the approved visual |
+| `Tachyon Consultants Website (offline).html` | Open in a browser to see the finished design |
+| `Tachyon Website - Developer Handoff.md` | Spec: tokens, per-page section breakdown |
 
-## Learn More
+If the junction breaks (e.g. the design folder moves), recreate it:
 
-To learn more about Next.js, take a look at the following resources:
+```powershell
+New-Item -ItemType Junction -Path "design-source" -Target "<path to design project>"
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**All development happens in this project.** The design folder is read-only
+reference; don't edit it.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Structure
 
-## Deploy on Vercel
+```
+src/
+  app/
+    layout.tsx            Header + Footer + fonts
+    globals.css           tokens, reset, keyframes, shared primitives
+    page.tsx              Home            /
+    page.module.css
+    services/             Services        /services
+    ai-engineering/       AI Engineering  /ai-engineering
+    hire-talent/          Hire Talent     /hire-talent
+    about/                About           /about
+    contact/              Contact         /contact
+  components/             each with its own .module.css
+  data/                   all page content as typed arrays
+  lib/
+    theme.ts              tokens, routes, palettes
+    icons.tsx             SVG paths copied from the prototype
+scripts/sync-assets.mjs
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Every page folder holds its own `page.tsx` + `page.module.css`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Styling
+
+No inline styles. Three layers:
+
+1. **`globals.css`** — CSS variables (`--accent`, `--ink`, …), reset,
+   keyframes, and shared primitives (`.container`, `.section`, `.h1`, `.card`,
+   `.btn`, `.chip`).
+2. **`*.module.css`** — everything page- or component-specific.
+3. **Dynamic values only** — icon-tile size/colour comes from data, so those
+   few values are passed as a `style` prop. Nothing else is inline.
+
+### Responsive
+
+The prototype was desktop-only; the responsive layer is new. Fluid `clamp()`
+type, grids collapsing 4→2→1, a burger menu below 1024px, and the hero photo
+dropped below 900px (its white gradient stops keeping the headline legible at
+that width). Respects `prefers-reduced-motion`.
+
+### Heading convention
+
+Section headings split across two lines and end in an orange period — use
+`<SectionHeading lines={[...]} />` and **omit the trailing period**, the
+component adds it.
+
+## Assets
+
+`public/uploads/` holds only the 24 images the design actually references,
+renamed to meaningful slugs (`award-clutch.png`, `role-ux-designers.png`, …).
+`npm run sync:assets` re-copies them from `design-source`, preserving the
+renames.
+
+## Outstanding
+
+- **Contact form does not submit.** `ContactForm.tsx` validates and shows the
+  success message; wire it to a Server Action, email, or CRM.
+- **Case-study logos are placeholders.** Pathomation, TuscaMind, ConvoSense,
+  LeadSense, Guardian Medical, Projul need final vector/PNG logos (render at
+  30px height).
+- **Photography** is from the prototype — replace with final licensed images.
+- **Section body copy** below the headings is paraphrased in places; headings
+  and card content are verbatim from the design.

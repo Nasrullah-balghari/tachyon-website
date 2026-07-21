@@ -1,0 +1,10 @@
+.line {
+  min-height: 1.2em;
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.word {
+  color: var(--accent);
+}

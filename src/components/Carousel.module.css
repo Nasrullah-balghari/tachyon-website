@@ -1,0 +1,145 @@
+/* Professional-services carousel — three stacked bands inside one rounded,
+   shadowed card. Colours and metrics transcribed from the design. */
+
+.card {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+}
+
+/* --- Header band -------------------------------------------------------- */
+.header {
+  background: #4a535e;
+  padding: 26px 44px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.headerTitle {
+  color: #fff;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.modes {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  margin-left: auto;
+  color: #fff;
+  font-weight: 600;
+  font-size: 19px;
+  opacity: 0.95;
+}
+
+.sep {
+  opacity: 0.4;
+}
+
+/* --- Body band ---------------------------------------------------------- */
+.body {
+  background: #3a424c;
+  padding: 56px 44px 30px;
+  display: grid;
+  grid-template-columns: 0.8fr 1.6fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.pub {
+  font-family: var(--font-playfair), Georgia, serif;
+  color: #fff;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.text {
+  color: #c7cdd4;
+  font-size: 22px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --- Footer band -------------------------------------------------------- */
+.footer {
+  background: #3a424c;
+  padding: 14px 44px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+
+.navBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.2s ease;
+}
+
+.navBtn:hover {
+  color: var(--accent);
+}
+
+.dots {
+  display: flex;
+  gap: 12px;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 0.2s ease;
+}
+
+.dotActive {
+  background: var(--accent);
+}
+
+/* --- Responsive --------------------------------------------------------- */
+@media (max-width: 760px) {
+  .body {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 40px 26px 24px;
+  }
+  .header {
+    padding: 22px 26px;
+    gap: 20px;
+  }
+  .headerTitle {
+    font-size: 22px;
+  }
+  .modes {
+    font-size: 16px;
+    gap: 18px;
+    margin-left: 0;
+    width: 100%;
+  }
+  .pub {
+    font-size: 28px;
+  }
+  .text {
+    font-size: 18px;
+  }
+  .footer {
+    padding: 14px 26px 26px;
+  }
+  .navBtn {
+    font-size: 15px;
+  }
+}
