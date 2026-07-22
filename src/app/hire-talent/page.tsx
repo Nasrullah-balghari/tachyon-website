@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import IconTile from "@/components/IconTile";
 import { ROUTES } from "@/lib/theme";
 import { contractTypes } from "@/data/pages";
+import Reveal from "@/components/Reveal";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -38,7 +39,7 @@ export default function HireTalentPage() {
 
       {/* ===== Two offer cards ===== */}
       <section className={styles.offersSection}>
-        <div className={styles.offers}>
+        <Reveal className={styles.offers} stagger>
           {HIRE_CARDS.map((h) => (
             <article key={h.title} className={styles.offerCard}>
               <IconTile name={h.icon} bg={h.tile} size={54} radius={14} iconSize={28} />
@@ -46,28 +47,30 @@ export default function HireTalentPage() {
               <p className={styles.offerDesc}>{h.desc}</p>
             </article>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* ===== Engagement models ===== */}
       <section className={styles.modelsSection}>
         <div className={styles.modelsInner}>
-          <h3 className={styles.modelsHeading}>Engagement models</h3>
-          <div className={styles.models}>
+          <Reveal>
+            <h3 className={styles.modelsHeading}>Engagement models</h3>
+          </Reveal>
+          <Reveal className={styles.models} stagger>
             {contractTypes.map((ct, i) => (
               <div key={ct.t} className={styles.modelCard}>
                 <IconTile name={ct.icon} index={i} size={44} radius={12} iconSize={22} />
                 <span className={styles.modelLabel}>{ct.t}</span>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Dark CTA ===== */}
       <section className={styles.ctaSection}>
         <div className={styles.ctaInner}>
-          <div className={styles.ctaCard}>
+          <Reveal className={styles.ctaCard} stagger>
             <div className={styles.ctaCopy}>
               <h3 className={styles.ctaHeading}>
                 Tell us the roles you need<span className={styles.ctaDot}>.</span>
@@ -80,7 +83,7 @@ export default function HireTalentPage() {
             <Link href={ROUTES.contact} className={styles.ctaBtn}>
               Talk to us →
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

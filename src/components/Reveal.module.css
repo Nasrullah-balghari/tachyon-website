@@ -1,0 +1,72 @@
+/* Fade-in-up keyframes. Driven by `animation` (not `transition`) so a child's
+   own transition — e.g. a link's hover color/underline — can never override the
+   reveal and stop it from fading. */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Whole-block fade-in-up. */
+.reveal {
+  opacity: 0;
+}
+
+.reveal.visible {
+  animation: revealUp 0.7s ease forwards;
+}
+
+/* Stagger mode: the box itself stays put; its direct children cascade up. */
+.stagger > * {
+  opacity: 0;
+}
+
+.stagger.visible > * {
+  animation: revealUp 0.7s ease forwards;
+}
+
+.stagger.visible > *:nth-child(1) {
+  animation-delay: 0s;
+}
+.stagger.visible > *:nth-child(2) {
+  animation-delay: 0.09s;
+}
+.stagger.visible > *:nth-child(3) {
+  animation-delay: 0.18s;
+}
+.stagger.visible > *:nth-child(4) {
+  animation-delay: 0.27s;
+}
+.stagger.visible > *:nth-child(5) {
+  animation-delay: 0.36s;
+}
+.stagger.visible > *:nth-child(6) {
+  animation-delay: 0.45s;
+}
+.stagger.visible > *:nth-child(7) {
+  animation-delay: 0.54s;
+}
+.stagger.visible > *:nth-child(8) {
+  animation-delay: 0.63s;
+}
+.stagger.visible > *:nth-child(n + 9) {
+  animation-delay: 0.72s;
+}
+
+/* Respect users who ask for less motion: show everything, no movement. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .stagger > * {
+    opacity: 1;
+    animation: none;
+  }
+  .reveal.visible,
+  .stagger.visible > * {
+    animation: none;
+  }
+}

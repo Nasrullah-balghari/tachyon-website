@@ -4,6 +4,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import IconTile from "@/components/IconTile";
 import SectionHeading from "@/components/SectionHeading";
+import Reveal from "@/components/Reveal";
 import { ROUTES } from "@/lib/theme";
 import {
   aiStats,
@@ -36,7 +37,7 @@ export default function AiEngineeringPage() {
 
       {/* ===== Stats strip ===== */}
       <section className={styles.statsStrip}>
-        <div className={styles.stats}>
+        <Reveal className={styles.stats} stagger>
           {aiStats.map((s, i) => (
             <div key={s.n} className={styles.stat}>
               <IconTile name={s.icon} index={i} size={56} radius={15} iconSize={28} />
@@ -44,16 +45,18 @@ export default function AiEngineeringPage() {
               <div className={styles.statDesc}>{s.d}</div>
             </div>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* ===== What we do ===== */}
       <section className={`${styles.aiSection} ${styles["aiSection--white"]}`}>
         <div className={styles.aiInner}>
-          <p className={styles.aiEyebrow}>What we do</p>
-          <SectionHeading className={styles.aiH2} lines={["Four disciplines, done properly"]} />
+          <Reveal stagger>
+            <p className={styles.aiEyebrow}>What we do</p>
+            <SectionHeading className={styles.aiH2} lines={["Four disciplines, done properly"]} />
+          </Reveal>
 
-          <div className={styles.cardGrid}>
+          <Reveal className={styles.cardGrid} stagger>
             {whatWeDo.map((x, i) => (
               <article key={x.t} className={styles.grayCard}>
                 <div className={styles.grayCardHead}>
@@ -64,17 +67,19 @@ export default function AiEngineeringPage() {
                 <p className={styles.grayDesc}>{x.d}</p>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Legacy modernization ===== */}
       <section className={`${styles.aiSection} ${styles.aiSectionTint}`}>
         <div className={styles.aiInner}>
-          <p className={styles.aiEyebrow}>Legacy modernization</p>
-          <SectionHeading className={styles.aiH2} lines={["Old systems, brought up to date"]} />
+          <Reveal stagger>
+            <p className={styles.aiEyebrow}>Legacy modernization</p>
+            <SectionHeading className={styles.aiH2} lines={["Old systems, brought up to date"]} />
+          </Reveal>
 
-          <div className={styles.cardGrid}>
+          <Reveal className={styles.cardGrid} stagger>
             {legacySteps.map((s) => (
               <div key={s.n} className={styles.legacyCard}>
                 <div className={styles.legacyNum}>{s.n}</div>
@@ -82,17 +87,19 @@ export default function AiEngineeringPage() {
                 <p className={styles.legacyDesc}>{s.d}</p>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== AI agents ===== */}
       <section className={`${styles.aiSection} ${styles["aiSection--white"]}`}>
         <div className={styles.aiInner}>
-          <p className={styles.aiEyebrow}>AI agents</p>
-          <SectionHeading className={styles.aiH2} lines={["Agents for the jobs that eat your time"]} />
+          <Reveal stagger>
+            <p className={styles.aiEyebrow}>AI agents</p>
+            <SectionHeading className={styles.aiH2} lines={["Agents for the jobs that eat your time"]} />
+          </Reveal>
 
-          <div className={styles.agentGrid}>
+          <Reveal className={styles.agentGrid} stagger>
             {aiAgents.map((a, i) => (
               <div key={a.t} className={styles.agentCard}>
                 <IconTile name={a.icon} index={i} size={46} radius={12} iconSize={24} />
@@ -100,17 +107,19 @@ export default function AiEngineeringPage() {
                 <p className={styles.agentDesc}>{a.d}</p>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Selected work ===== */}
       <section className={`${styles.aiSection} ${styles.aiSectionTint}`}>
         <div className={styles.aiInner}>
-          <p className={styles.aiEyebrow}>Selected work</p>
-          <SectionHeading className={styles.aiH2} lines={["Real problems. Systems that run"]} />
+          <Reveal stagger>
+            <p className={styles.aiEyebrow}>Selected work</p>
+            <SectionHeading className={styles.aiH2} lines={["Real problems. Systems that run"]} />
+          </Reveal>
 
-          <div className={styles.workGrid}>
+          <Reveal className={styles.workGrid} stagger>
             {selectedWork.map((w) => (
               <article key={w.name} className={styles.workCard}>
                 <div className={styles.workHead}>
@@ -139,17 +148,19 @@ export default function AiEngineeringPage() {
                 </div>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Our stack ===== */}
       <section className={`${styles.aiSection} ${styles["aiSection--white"]}`}>
         <div className={styles.aiInner}>
-          <p className={styles.aiEyebrow}>Our stack</p>
-          <SectionHeading className={styles.aiH2} lines={["The tools behind the work"]} />
+          <Reveal stagger>
+            <p className={styles.aiEyebrow}>Our stack</p>
+            <SectionHeading className={styles.aiH2} lines={["The tools behind the work"]} />
+          </Reveal>
 
-          <div className={styles.stackGrid}>
+          <Reveal className={styles.stackGrid} stagger>
             {stackGroups.map((g, i) => (
               <div key={g.t} className={styles.stackCard}>
                 <div className={styles.stackHead}>
@@ -165,16 +176,18 @@ export default function AiEngineeringPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Why us (dark) ===== */}
       <section className={`${styles.aiSection} ${styles.aiSectionDark}`}>
         <div className={styles.aiInner}>
-          <p className={styles.whyEyebrow}>Why us</p>
+          <Reveal stagger>
+            <p className={styles.whyEyebrow}>Why us</p>
+          </Reveal>
 
-          <div className={styles.whyGrid}>
+          <Reveal className={styles.whyGrid} stagger>
             {whyUs.map((w, i) => (
               <div key={w.k} className={styles.whyCard}>
                 <IconTile name={w.icon} index={i} size={46} radius={12} iconSize={24} dark />
@@ -182,16 +195,16 @@ export default function AiEngineeringPage() {
                 <p className={styles.whyDesc}>{w.d}</p>
               </div>
             ))}
-          </div>
+          </Reveal>
 
-          <div className={styles.whyFoot}>
+          <Reveal className={styles.whyFoot} stagger>
             <p className={styles.whyFootHeading}>
               No handoffs. No finger-pointing. One team, model to cloud.
             </p>
             <Link href={ROUTES.contact} className={styles.arrowBtn}>
               Book a call →
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

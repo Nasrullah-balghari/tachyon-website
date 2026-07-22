@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
 import { Icon } from "@/lib/icons";
 import { CONTACT } from "@/data/pages";
+import Reveal from "@/components/Reveal";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export default function ContactPage() {
       <PageHero eyebrow="Contact" title="Get in touch with us." />
 
       <section className={styles.section}>
-        <div className={styles.grid}>
+        <Reveal className={styles.grid} stagger>
           <div>
             <h2 className={styles.company}>Tachyon Consultants</h2>
 
@@ -54,7 +55,7 @@ export default function ContactPage() {
           </div>
 
           <ContactForm />
-        </div>
+        </Reveal>
       </section>
     </>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import IconTile from "@/components/IconTile";
+import Reveal from "@/components/Reveal";
 import { competencies, aboutStats, aboutValues } from "@/data/pages";
 import styles from "./page.module.css";
 
@@ -22,12 +23,14 @@ export default function AboutPage() {
       {/* ===== Core competencies ===== */}
       <section className={`${styles.section} ${styles.sectionWhite}`}>
         <div className={styles.inner}>
-          <h2 className={styles.h2}>Core competencies</h2>
-          <p className={styles.lead}>
-            Deep specialization across the modern Microsoft platform.
-          </p>
+          <Reveal stagger>
+            <h2 className={styles.h2}>Core competencies</h2>
+            <p className={styles.lead}>
+              Deep specialization across the modern Microsoft platform.
+            </p>
+          </Reveal>
 
-          <div className={styles.grid}>
+          <Reveal className={styles.grid} stagger>
             {competencies.map((x, i) => (
               <article key={x.t} className={styles.card}>
                 <IconTile name={x.icon} index={i} size={56} radius={14} iconSize={28} />
@@ -35,34 +38,38 @@ export default function AboutPage() {
                 <p className={styles.cardDesc}>{x.d}</p>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== By the numbers (dark) ===== */}
       <section className={`${styles.section} ${styles.sectionDark}`}>
         <div className={styles.inner}>
-          <p className={styles.eyebrow}>By the numbers</p>
-          <div className={styles.stats}>
+          <Reveal stagger>
+            <p className={styles.eyebrow}>By the numbers</p>
+          </Reveal>
+          <Reveal className={styles.stats} stagger>
             {aboutStats.map((s) => (
               <div key={s.d}>
                 <div className={styles.statNum}>{s.n}</div>
                 <div className={styles.statLabel}>{s.d}</div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Why teams stay ===== */}
       <section className={`${styles.section} ${styles.sectionWhite}`}>
         <div className={styles.inner}>
-          <h2 className={styles.h2}>Why teams stay with us</h2>
-          <p className={styles.lead}>
-            Most clients come for one project. They stay for years.
-          </p>
+          <Reveal stagger>
+            <h2 className={styles.h2}>Why teams stay with us</h2>
+            <p className={styles.lead}>
+              Most clients come for one project. They stay for years.
+            </p>
+          </Reveal>
 
-          <div className={styles.grid}>
+          <Reveal className={styles.grid} stagger>
             {aboutValues.map((v, i) => (
               <article key={v.t} className={styles.valueCard}>
                 <IconTile name={v.icon} index={i} size={56} radius={14} iconSize={26} />
@@ -70,19 +77,19 @@ export default function AboutPage() {
                 <p className={styles.cardDesc}>{v.d}</p>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Our culture ===== */}
       <section className={styles.cultureSection}>
-        <div className={styles.cultureInner}>
+        <Reveal className={styles.cultureInner} stagger>
           <p className={styles.eyebrow}>Our culture</p>
           <p className={styles.cultureText}>
             Our energy, our free spirit, and our relentless curiosity are what
             turn hard problems into working systems.
           </p>
-        </div>
+        </Reveal>
       </section>
     </>
   );

@@ -16,6 +16,7 @@ import {
   steps,
 } from "@/data/home";
 import SectionHeading from "@/components/SectionHeading";
+import Reveal from "@/components/Reveal";
 import styles from "./page.module.css";
 
 export default function HomePage() {
@@ -36,7 +37,7 @@ export default function HomePage() {
         </div>
 
         <div className={`container ${styles.heroInner}`}>
-          <div className={styles.heroCopy}>
+          <Reveal className={styles.heroCopy} stagger>
             <h1 className="h1">
               Build Exceptional Digital Products With Our Top 1%
             </h1>
@@ -44,13 +45,13 @@ export default function HomePage() {
             <Link href={ROUTES.contact} className="btn btn--accent">
               Schedule a Call
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Trust ===== */}
       <section className={styles.trustSection}>
-        <div className={`container container--content ${styles.trust}`}>
+        <Reveal className={`container container--content ${styles.trust}`} stagger>
           <SectionHeading
             className={styles.trustHeading}
             tone="muted"
@@ -64,13 +65,13 @@ export default function HomePage() {
             height={300}
             className={styles.trustLogos}
           />
-        </div>
+        </Reveal>
       </section>
 
       {/* ===== Services ===== */}
       <section className={styles.servicesSection}>
         <div className="container container--content">
-          <div className={styles.servicesHead}>
+          <Reveal className={styles.servicesHead} stagger>
             <SectionHeading
               className={styles.servicesHeading}
               lines={[
@@ -81,9 +82,9 @@ export default function HomePage() {
             <Link href={ROUTES.services} className={styles.servicesLink}>
               Everything we do <span aria-hidden="true">→</span>
             </Link>
-          </div>
+          </Reveal>
 
-          <div className={styles.servicesGrid}>
+          <Reveal className={styles.servicesGrid} stagger>
             {services.map((s) => (
               <article key={s.title} className={styles.serviceCard}>
                 <div className={styles.tileSpacer}>
@@ -100,15 +101,15 @@ export default function HomePage() {
                 </div>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Professional services carousel ===== */}
       <section className={styles.carouselSection}>
-        <div className="container container--content">
+        <Reveal className="container container--content">
           <Carousel />
-        </div>
+        </Reveal>
       </section>
 
       {/* ===== Tech marquee ===== */}
@@ -117,7 +118,7 @@ export default function HomePage() {
       {/* ===== Testimonials ===== */}
       <section className={styles.testi}>
         <div className={styles.testiTop}>
-          <div className={styles.testiPhotoWrap}>
+          <Reveal className={styles.testiPhotoWrap}>
             <Image
               src="/uploads/live-testi.webp"
               alt="Tachyon client collaboration"
@@ -125,9 +126,9 @@ export default function HomePage() {
               sizes="(max-width: 900px) 100vw, 47vw"
               className={styles.testiPhoto}
             />
-          </div>
+          </Reveal>
 
-          <div className={styles.testiCopy}>
+          <Reveal className={styles.testiCopy} stagger>
             <SectionHeading
               className={styles.testiHeading}
               lines={["Most clients come for one project. They stay for years"]}
@@ -139,10 +140,10 @@ export default function HomePage() {
             <Link href={ROUTES.ai} className={styles.testiLink}>
               Our greatest hits →
             </Link>
-          </div>
+          </Reveal>
         </div>
 
-        <div className={styles.quotes}>
+        <Reveal className={styles.quotes} stagger>
           {quotes.map((q) => (
             <article key={q.name} className={styles.quoteCard}>
               <div className={styles.quoteHead}>
@@ -165,14 +166,14 @@ export default function HomePage() {
               </p>
             </article>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* ===== Awards (dark) ===== */}
       <section className={styles.awards}>
         <div className="container container--content">
           <div className={styles.awardsTop}>
-            <div>
+            <Reveal stagger>
               <div className={styles.proofLabel}>THE PROOF</div>
               <h2 className={styles.awardsHeading}>
                 <span className={styles.accent}>Excellence.</span>
@@ -187,9 +188,9 @@ export default function HomePage() {
               <Link href={ROUTES.about} className={styles.awardsLink}>
                 Our trophy cabinet →
               </Link>
-            </div>
+            </Reveal>
 
-            <div className={styles.rings}>
+            <Reveal className={styles.rings} stagger>
               <TextRing
                 id="ringProj"
                 num="650+"
@@ -202,10 +203,10 @@ export default function HomePage() {
                 label={["industry", "sectors"]}
                 text="industry sectors • industry sectors • industry sectors • "
               />
-            </div>
+            </Reveal>
           </div>
 
-          <div className={styles.badges}>
+          <Reveal className={styles.badges} stagger>
             {badges.map((b) => (
               <div key={b.title} className={styles.badge}>
                 <Image
@@ -219,18 +220,20 @@ export default function HomePage() {
                 <p className={styles.badgeDesc}>{b.desc}</p>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Reasons ===== */}
       <section className={styles.reasonsSection}>
         <div className={styles.reasonsInner}>
-          <SectionHeading
-            className={styles.reasonsHeading}
-            lines={["Nothing to figure out.", "We make the hard part easy"]}
-          />
-          <div className={styles.reasonsGrid}>
+          <Reveal>
+            <SectionHeading
+              className={styles.reasonsHeading}
+              lines={["Nothing to figure out.", "We make the hard part easy"]}
+            />
+          </Reveal>
+          <Reveal className={styles.reasonsGrid} stagger>
             {reasons.map((r) => (
               <div key={r.title} className={styles.reason}>
                 <span className={styles.checkbox} aria-hidden="true">
@@ -242,14 +245,14 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Assemble team ===== */}
       <section className={styles.assembleSection}>
         <div className={styles.assembleInner}>
-          <div className={styles.roles}>
+          <Reveal className={styles.roles} stagger>
             {roles.map((r, i) => (
               <div key={r.label} className={styles.role}>
                 <div className={styles.roleFigure}>
@@ -265,21 +268,21 @@ export default function HomePage() {
                 <p className={styles.roleLabel}>{r.label}</p>
               </div>
             ))}
-          </div>
+          </Reveal>
 
-          <div className={styles.assembleFoot}>
+          <Reveal className={styles.assembleFoot} stagger>
             <h2 className={styles.assembleHeading}>Let&apos;s assemble your team.</h2>
             <Link href={ROUTES.contact} className={`btn ${styles.assembleBtn}`}>
               Schedule a Call
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Process ===== */}
       <section className={styles.processSection}>
         <div className={styles.processGrid}>
-          <div>
+          <Reveal stagger>
             <SectionHeading
               className={styles.processHeading}
               lines={["How we work. Fast, clear, no runaround"]}
@@ -293,9 +296,9 @@ export default function HomePage() {
                 className={styles.processPhoto}
               />
             </div>
-          </div>
+          </Reveal>
 
-          <div className={styles.steps}>
+          <Reveal className={styles.steps} stagger>
             {steps.map((s) => (
               <div key={s.step} className={styles.step}>
                 <span className={styles.stepIcon}>
@@ -314,14 +317,14 @@ export default function HomePage() {
             >
               Book a Call
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ===== Closing CTA (dark) ===== */}
       <section className={styles.closing}>
         <div className={styles.closingGrid}>
-          <div>
+          <Reveal stagger>
             <h2 className={styles.closingHeading}>
               Need a team that owns the whole build?
               <br />
@@ -330,7 +333,7 @@ export default function HomePage() {
             <Link href={ROUTES.contact} className={`btn ${styles.closingBtn}`}>
               Schedule a Call
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

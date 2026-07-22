@@ -5,6 +5,7 @@ import IconTile from "@/components/IconTile";
 import { Icon } from "@/lib/icons";
 import { ROUTES } from "@/lib/theme";
 import { servicesPage } from "@/data/pages";
+import Reveal from "@/components/Reveal";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function ServicesPage() {
       />
 
       <section className={styles.cardsSection}>
-        <div className={styles.cards}>
+        <Reveal className={styles.cards} stagger>
           {servicesPage.map((s, i) => (
             <article key={s.num} className={styles.card}>
               <div className={styles.cardHead}>
@@ -43,13 +44,13 @@ export default function ServicesPage() {
               </div>
             </article>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* Closing CTA — dark rounded card, heading left, button right. */}
       <section className={styles.ctaSection}>
         <div className={styles.ctaInner}>
-          <div className={styles.ctaCard}>
+          <Reveal className={styles.ctaCard} stagger>
             <h2 className={styles.ctaHeading}>
               Not sure which engagement fits? Let&apos;s scope it together
               <span className={styles.ctaDot}>.</span>
@@ -57,7 +58,7 @@ export default function ServicesPage() {
             <Link href={ROUTES.contact} className={styles.ctaBtn}>
               Talk to us →
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

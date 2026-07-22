@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ROUTES } from "@/lib/theme";
 import { Icon } from "@/lib/icons";
+import Reveal from "./Reveal";
 import styles from "./PageHero.module.css";
 
 /** Light hero used by every inner page (no photo, per the design). */
@@ -29,7 +30,7 @@ export default function PageHero({
 
   return (
     <section className={`${styles.hero} ${tint ? styles.heroTint : ""}`}>
-      <div className={`container container--narrow ${styles.inner}`}>
+      <Reveal className={`container container--narrow ${styles.inner}`} stagger>
         {badge && (
           <span className={styles.badge}>
             <span className={styles.badgeIcon}>
@@ -49,7 +50,7 @@ export default function PageHero({
             {cta}
           </Link>
         )}
-      </div>
+      </Reveal>
     </section>
   );
 }
