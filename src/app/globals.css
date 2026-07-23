@@ -42,7 +42,10 @@
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+  /* `clip` (not `hidden`) prevents horizontal scroll WITHOUT establishing a
+     scroll container — otherwise it would disable `position: sticky` for every
+     descendant (e.g. the stacking problem cards on /ai-agents). */
+  overflow-x: clip;
 }
 
 body {

@@ -30,7 +30,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${poppins.variable} ${playfair.variable}`}>
-      <body>
+      {/* Browser extensions (e.g. ColorZilla's cz-shortcut-listen) inject
+          attributes onto <body> before hydration; suppress the resulting
+          mismatch warning for this element only. */}
+      <body suppressHydrationWarning>
         <Header />
         <main>{children}</main>
         <Footer />

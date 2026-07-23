@@ -1,0 +1,107 @@
+/* Conversation-intelligence stats bar — white card on the dark section. */
+.bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.cell {
+  padding: 48px 36px;
+  background: transparent;
+  text-align: left;
+  /* Hidden state set in CSS so there's no flash before the observer fires. */
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+/* Dividers: border-left on cells 2–4, none before the first or after the last. */
+.cell + .cell {
+  border-left: 1px solid rgba(11, 11, 15, 0.1);
+}
+
+/* Staggered reveal once the bar scrolls into view. */
+.started .cell {
+  animation: statReveal 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--i) * 120ms);
+}
+
+@keyframes statReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.num {
+  font-size: clamp(40px, 4vw, 56px);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 14px;
+  /* Even digit widths so the label below never shifts as digits are added. */
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--accent-deep);
+  margin: 0 0 22px;
+}
+
+.desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--body);
+  margin: 0;
+}
+
+/* Reduced motion: static, final values, no reveal or stagger. */
+@media (prefers-reduced-motion: reduce) {
+  .cell {
+    opacity: 1;
+    transform: none;
+  }
+  .started .cell {
+    animation: none;
+  }
+}
+
+/* 2 columns: divider left on column 2, top on the bottom row. */
+@media (max-width: 1024px) {
+  .bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cell + .cell {
+    border-left: none;
+  }
+  .cell:nth-child(2n) {
+    border-left: 1px solid rgba(11, 11, 15, 0.1);
+  }
+  .cell:nth-child(n + 3) {
+    border-top: 1px solid rgba(11, 11, 15, 0.1);
+  }
+}
+
+/* 1 column: dividers become top borders on cells 2–4. */
+@media (max-width: 640px) {
+  .bar {
+    grid-template-columns: 1fr;
+  }
+  .cell {
+    padding: 36px 28px;
+  }
+  .cell:nth-child(2n) {
+    border-left: none;
+  }
+  .cell:nth-child(n + 3) {
+    border-top: none;
+  }
+  .cell + .cell {
+    border-top: 1px solid rgba(11, 11, 15, 0.1);
+  }
+}

@@ -77,6 +77,307 @@
   color: var(--ink);
 }
 
+/* ==========================================================================
+   AI Agents mega menu — opens on hover / keyboard focus of the nav item.
+   Structure mirrors the prototype product.html dropdown.
+   ========================================================================== */
+
+.megaWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* Small caret button beside the "AI Agents" link — the keyboard way to open
+   the panel without navigating (Enter on the link navigates). */
+.caretBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 2px;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.caretBtn:hover,
+.caretBtn[aria-expanded="true"] {
+  color: var(--accent);
+}
+
+.caretBtn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.chev {
+  font-size: 16px;
+  opacity: 0.55;
+  transition: transform 0.2s ease;
+}
+
+.chev[data-open="true"] {
+  transform: rotate(180deg);
+}
+
+/* Panel. The top padding bridges the gap to the trigger so the pointer can
+   cross into the menu without it closing. Visibility is toggled by the
+   `.megaOpen` class (React-driven), not CSS :hover. Centered under the
+   trigger and width-capped so it never overflows at 1024–1440px. */
+/* `--mega-shift` is set from JS on open: it nudges the centered panel left or
+   right so it always stays >= 24px inside the viewport. */
+.mega {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(calc(-50% + var(--mega-shift, 0px))) translateY(-6px);
+  padding-top: 14px;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease-out, transform 0.18s ease-out,
+    visibility 0.18s ease-out;
+}
+
+.megaOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(calc(-50% + var(--mega-shift, 0px))) translateY(0);
+}
+
+.megaCard {
+  width: 800px;
+  max-width: calc(100vw - 48px);
+  background: #fff;
+  border: 1px solid #ececf1;
+  border-radius: 16px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  padding: 30px;
+  display: grid;
+  /* 300px card / remaining space. minmax(0, 1fr) is deliberate: grid children
+     default to min-width auto and refuse to shrink, which is what let the
+     right column overflow past the panel's edge. */
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 40px;
+  /* Both columns stretch to the taller one so the left card is full height. */
+  align-items: stretch;
+}
+
+/* ROOT CAUSE of the flush-text bug: `.navDesktop a { padding: 4px 0 }` is an
+   element-qualified selector (0-1-1) that out-specifies the single-class
+   `.megaFeature` / `.megaRow` (0-1-0) — the panel lives inside .navDesktop and
+   these rows are <a> elements, so their horizontal padding was zeroed no
+   matter what the class declared. These (0-2-1) selectors win. */
+.navDesktop a.megaFeature {
+  padding: 32px;
+}
+.navDesktop a.megaRow {
+  padding: 12px 14px;
+}
+
+/* Neutralise the underline + colour-shift the base nav-link rules apply to
+   every <a> in the desktop nav — the mega links have their own styling. */
+.mega a::after {
+  content: none;
+}
+.mega a:hover {
+  color: inherit;
+}
+
+/* Left featured card — clickable, full height of the menu, content centred
+   vertically to match the reference. */
+.megaFeature {
+  background: #0b0b0f;
+  border-radius: 12px;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 32px; /* enforced by the higher-specificity rule above */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+.megaFeature:hover {
+  background: #16161c;
+}
+
+.megaFeature:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.megaFeatureHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.megaFeatureTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.megaArrow {
+  color: var(--accent);
+  font-size: 20px;
+  line-height: 1; /* centers against the title's cap height */
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.megaFeature:hover .megaArrow {
+  transform: translateX(4px);
+}
+
+/* Small and clearly muted against the title. */
+.megaFeatureBlurb {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.68);
+  font-weight: 400;
+}
+
+/* Right column rows. min-width: 0 is required — as a grid child it would
+   otherwise refuse to shrink below its content width and overflow the panel. */
+.megaRows {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.megaRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  min-height: 56px;
+  border-radius: 10px;
+  color: #0b0b0f;
+  transition: background 0.16s ease;
+}
+
+/* Active / available row (ConvoSense) — state is signalled by the background
+   tint alone; the label stays dark (no orange shift, no movement). */
+.megaRow:not(.megaRowSoon) {
+  cursor: pointer;
+}
+
+.megaRow:not(.megaRowSoon):hover {
+  background: #f5f3f0;
+}
+
+.megaRow:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* Coming-soon rows — inert: default cursor, NO hover response. Readable but
+   clearly secondary via colour; no extra opacity stacked on top. */
+.megaRowSoon {
+  cursor: default;
+}
+
+/* Icon: fixed 30px box — no tile, no border. For the live product it sizes the
+   <Image fill>; for coming-soon it centres a monochrome placeholder glyph. */
+.megaIcon {
+  position: relative;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Coming-soon glyphs: muted and dimmed (the label carries no extra opacity). */
+.megaIconSoon {
+  color: #8a8a96;
+  opacity: 0.5;
+}
+
+/* The two coming-soon logos are wide wordmarks that render tiny inside the
+   square box — scale the image up without changing the box, so the labels of
+   all rows stay left-aligned. */
+.megaIconSoon .megaLogo {
+  transform: scale(1.35);
+}
+
+.megaLogo {
+  object-fit: contain;
+}
+
+/* Label + badge form one left-aligned group with a 10px gap — the badge is
+   never pushed toward the row's right edge. */
+.megaGroup {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.megaName {
+  min-width: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: #0b0b0f;
+  line-height: 1.2;
+}
+
+.megaRowSoon .megaName {
+  font-weight: 500;
+  color: #8a8a96;
+}
+
+/* Neutral grey "Coming Soon" badge — no blue tint. */
+.megaSoon {
+  padding: 5px 11px;
+  background: #f0f0f3;
+  color: #6b6b76;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Reduced motion: keep the fade, drop the slide (and the badge/arrow shifts). */
+@media (prefers-reduced-motion: reduce) {
+  .mega {
+    transform: translateX(calc(-50% + var(--mega-shift, 0px)));
+    transition: opacity 0.18s ease-out, visibility 0.18s ease-out;
+  }
+  .megaOpen {
+    transform: translateX(calc(-50% + var(--mega-shift, 0px)));
+  }
+  .megaFeature:hover .megaArrow {
+    transform: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .megaCard {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 1024px) {
   .navDesktop {
     display: none;
@@ -228,6 +529,118 @@
   margin-top: auto;
   padding-top: 28px;
   text-align: left;
+}
+
+/* ---- Mobile "AI Agents" accordion (replaces the mega menu < 1024px) ------ */
+
+.acc {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--light);
+}
+
+.accHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 4px;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.accHead[aria-expanded="true"] {
+  color: var(--accent);
+}
+
+.accChev {
+  font-size: 12px;
+  opacity: 0.6;
+  transition: transform 0.2s ease;
+}
+
+.accChev[data-open="true"] {
+  transform: rotate(180deg);
+}
+
+/* Product rows grouped in a soft card so they read as one block. */
+.accPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 6px 0 12px;
+  padding: 6px;
+  background: var(--light);
+  border-radius: 12px;
+}
+
+/* `display: flex` above would otherwise override the browser's [hidden]
+   default, leaving the accordion permanently expanded. */
+.accPanel[hidden] {
+  display: none;
+}
+
+/* Override the base `.drawerNav a` styling (border, big padding, → arrow)
+   for the compact indented sub-items. */
+.accItem.accItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  /* Hairline separator between the rows. */
+  border-bottom: 1px solid rgba(20, 18, 45, 0.08);
+  opacity: 1;
+  transform: none;
+}
+
+/* No divider after the last row. */
+.accItem.accItem:last-child {
+  border-bottom: none;
+}
+
+.accItemProduct.accItemProduct:hover {
+  background: #fff;
+}
+
+.accItem::after {
+  content: none;
+}
+
+.accItemProduct.accItemProduct:hover {
+  color: var(--accent);
+}
+
+.accIcon {
+  position: relative;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+}
+
+.accItemName {
+  flex: 1;
+}
+
+/* Coming-soon rows in the accordion: dimmed, no tap handler, no hover. */
+.accItemSoon.accItemSoon {
+  opacity: 0.55;
+  font-weight: 500;
+  color: #4a4a55;
+  cursor: default;
+}
+
+.accItemSoon.accItemSoon:hover {
+  color: #4a4a55;
 }
 
 @media (prefers-reduced-motion: reduce) {

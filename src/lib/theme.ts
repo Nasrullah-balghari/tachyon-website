@@ -33,6 +33,7 @@ export const ROUTES = {
   home: "/",
   services: "/services",
   ai: "/ai-engineering",
+  aiAgents: "/ai-agents",
   hiring: "/hire-talent",
   about: "/about",
   contact: "/contact",
@@ -42,6 +43,7 @@ export const NAV = [
   { href: ROUTES.home, label: "Home" },
   { href: ROUTES.services, label: "Services" },
   { href: ROUTES.ai, label: "AI Engineering" },
+  { href: ROUTES.aiAgents, label: "AI Agents" },
   { href: ROUTES.hiring, label: "Hire Talent" },
   { href: ROUTES.about, label: "About" },
 ] as const;
